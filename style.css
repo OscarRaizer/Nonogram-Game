@@ -3,11 +3,12 @@ body {
     margin: 0;
 }
 
-.nonogram__wrapper {
+
+.page__wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: 35px 30px;
 }
 
@@ -18,14 +19,39 @@ body {
     margin-bottom: 100px;
 }
 
+.nonogram__wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+}
+
+.row-hints {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    margin-right: 30px;
+    height: auto;
+    line-height: 60px;
+}
+
+.col-hints {
+    writing-mode: vertical-lr;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    line-height: 60px;
+    margin-bottom: 30px;
+
+    .hint {
+        transform: rotate(-90deg);
+    } 
+}
 
 table {
-    margin-left: auto;
-    margin-right: auto;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
     outline: 5px solid rgb(134, 134, 134);
     display: block;
-    width: 304px;
-    height: 304px;
+    /* width: 304px; */
+    /* height: 304px; */
     margin: 0;
     padding: 0;
     border-spacing: 0;
