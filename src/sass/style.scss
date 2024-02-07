@@ -1,8 +1,11 @@
-body {
-    background-color: #ffffff;
-    margin: 0;
-}
+@import "global/fonts";
 
+
+body {
+    background: rgb(35, 35, 35);
+    margin: 0;
+    height: 100vh;
+}
 
 .page__wrapper {
     display: flex;
@@ -13,8 +16,12 @@ body {
 }
 
 .nonogram__title p {
+    font-family: 'Honk';
+    line-height: 30px;
+    letter-spacing: 3px;
+    color: aliceblue;
     margin: 0;
-    font-size: 50px;
+    font-size: 60px;
     font-weight: 700;
     margin-bottom: 100px;
 }
@@ -23,6 +30,10 @@ body {
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-template-rows: repeat(2, auto);
+}
+
+.hints {
+    color: white;
 }
 
 .row-hints {

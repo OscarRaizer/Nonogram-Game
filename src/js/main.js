@@ -1,4 +1,4 @@
-import './style.css';
+import '../sass/style.scss';
 
 const pageWrapper = document.createElement('div');
 pageWrapper.classList.add('page__wrapper');
