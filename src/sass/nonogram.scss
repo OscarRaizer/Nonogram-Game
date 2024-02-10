@@ -1,0 +1,57 @@
+.nonogram__wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+}
+
+.hints {
+    font-family: 'Protest Guerrilla';
+    color: white;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.row-hints {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    margin-right: 30px;
+    height: auto;
+    line-height: 60px;
+}
+
+.col-hints {
+    writing-mode: vertical-lr;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    line-height: 60px;
+    margin-bottom: 30px;
+
+    .hint {
+        transform: rotate(-90deg);
+    } 
+}
+
+table {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    outline: 5px solid rgb(0, 0, 0, 0.1);
+    display: block;
+    /* width: 304px; */
+    /* height: 304px; */
+    margin: 0;
+    padding: 0;
+    border-spacing: 0;
+}
+
+td {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
+    width: 60px;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+
+    &:hover {
+        background-color: gray;
+    }
+}
