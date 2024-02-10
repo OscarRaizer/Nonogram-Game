@@ -6,10 +6,10 @@ document.body.appendChild(pageWrapper);
 
 // ЗАГОЛОВОК
 
-const nonogramTitle = document.createElement('div');
-nonogramTitle.classList.add('nonogram__title');
-nonogramTitle.innerHTML = '<p>NONOGRAM GAME</p>';
-pageWrapper.appendChild(nonogramTitle);
+const pageTitle = document.createElement('div');
+pageTitle.classList.add('page__title');
+pageTitle.innerHTML = '<p>NONOGRAM GAME</p>';
+pageWrapper.appendChild(pageTitle);
 
 // Wrapper нонограммы
 
@@ -89,6 +89,10 @@ function clickNonogram(event) {
   initialNonogramState.set(rowIndex, cellIndex, newValue);
 
   renderNonogram();
+
+  if (checkSolution()) {
+    modalResolve();
+  }
 }
 
 const cells = document.querySelectorAll('.nonogram-cell');
@@ -151,12 +155,20 @@ function generateHints(pattern) {
 }
 
 // Шаблон рисунка
+// const pattern = [
+//   [0, 1, 0, 1, 1],
+//   [0, 1, 0, 1, 0],
+//   [0, 1, 0, 1, 1],
+//   [1, 1, 0, 0, 1],
+//   [0, 0, 0, 1, 1],
+// ];
+
 const pattern = [
-  [0, 1, 0, 1, 1],
-  [0, 1, 0, 1, 0],
-  [0, 1, 0, 1, 1],
-  [1, 1, 0, 0, 1],
-  [0, 0, 0, 1, 1],
+  [1, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0],
 ];
 
 const hints = generateHints(pattern);
@@ -193,3 +205,45 @@ function renderHints() {
 }
 // Отображение сгенерированных подсказок
 renderHints();
+
+function checkSolution() {
+  const tableRows = table.getElementsByTagName('tr');
+  for (let i = 0; i < numRows; i += 1) {
+    const cells = tableRows[i].getElementsByTagName('td');
+    for (let j = 0; j < numCols; j += 1) {
+      const cellValue = initialNonogramState.get(i, j);
+      if (cellValue !== pattern[i][j]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+checkSolution();
+
+// Модалка результата
+
+function modalResolve() {
+  const modalResolveWrapper = document.createElement('div');
+  modalResolveWrapper.classList.add('modal__wrapper');
+  document.body.appendChild(modalResolveWrapper);
+
+  const modalResolveInner = document.createElement('div');
+  modalResolveInner.classList.add('modal__resolve');
+  modalResolveWrapper.appendChild(modalResolveInner);
+
+  const paragraph = document.createElement('p');
+  paragraph.classList.add('modal__title');
+  paragraph.textContent = 'CONGRATULATIONS!';
+  modalResolveInner.appendChild(paragraph);
+
+  const modalClose = document.createElement('div');
+  modalClose.classList.add('modal__close');
+  modalResolveInner.appendChild(modalClose);
+  modalClose.innerHTML = '<p>X</p >';
+
+  modalClose.addEventListener('click', () => {
+    modalResolveWrapper.remove();
+  });
+}
