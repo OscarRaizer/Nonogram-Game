@@ -8,7 +8,6 @@
     min-height: 100vh;
     overflow: hidden;
     background-color: rgb(0, 0, 0, 0.2);
-    // background-image: linear-gradient(to bottom, #ff627a, #ff8b6d, #ffb36d, #ffda7f, #ffffa2);
 }
 
 .modal__resolve {
@@ -20,7 +19,6 @@
     left: 50%;
     min-height: 60%;
     min-width: 60%;
-    // width: 800px;
     transform: translate(-50%, -50%);
     background-color: rgb(0, 0, 0, 0.6);
     color: white;
@@ -30,11 +28,9 @@
 }
 
 .modal__title {
-    font-family: 'Josefin Slab';
-    color: #ffffff;
+    font-family: "Josefin Slab";
     font-size: 50px;
     margin: 0;
-    top: 50%;
     color: transparent;    
     -webkit-background-clip: text;
     background-clip: text;
@@ -43,10 +39,7 @@
 
 
 .modal__close {
-    // background-color: red;
     cursor: pointer;
-    // width: 10px;
-    // height: 10px;
     position: absolute;
     top: 20px;
     right: 30px;
@@ -57,5 +50,6 @@
         margin: 0;
         display: block;
         padding: 5px;
-        font-family: Playpen Sans}
+        font-family: "Playpen Sans";
+    }
 }

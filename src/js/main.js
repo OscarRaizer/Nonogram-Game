@@ -1,24 +1,43 @@
 import '../sass/style.scss';
+import modalResolve from './modalResolve';
+import {
+  gameWrapper, gameTitle, nonogram, nonogramWrapper, nonogramButtons,
+} from './const';
+import {
+  gameButtons, buttonReload, buttonSettings, buttonNew, buttonContinue, buttonLeaderBoard,
+  buttonSave, buttonSolution,
+} from './buttons';
 
-const pageWrapper = document.createElement('div');
-pageWrapper.classList.add('page__wrapper');
-document.body.appendChild(pageWrapper);
+// HTML rendering
+document.body.appendChild(gameWrapper);
 
-// ЗАГОЛОВОК
+gameWrapper.appendChild(gameTitle);
 
-const pageTitle = document.createElement('div');
-pageTitle.classList.add('page__title');
-pageTitle.innerHTML = '<p>NONOGRAM GAME</p>';
-pageWrapper.appendChild(pageTitle);
+gameWrapper.appendChild(gameButtons);
+gameButtons.appendChild(buttonNew);
+gameButtons.appendChild(buttonContinue);
+gameButtons.appendChild(buttonSettings);
+gameButtons.appendChild(buttonLeaderBoard);
 
-// Wrapper нонограммы
+gameWrapper.appendChild(nonogramWrapper);
+nonogramWrapper.appendChild(nonogram);
+nonogramWrapper.appendChild(nonogramButtons);
+nonogramButtons.appendChild(buttonReload);
+nonogramButtons.appendChild(buttonSave);
+nonogramButtons.appendChild(buttonSolution);
 
-const nonogramWrapper = document.createElement('div');
-nonogramWrapper.classList.add('nonogram__wrapper');
-pageWrapper.appendChild(nonogramWrapper);
+// Menu
+
+function startGame() {
+  buttonNew.addEventListener('click', () => {
+    nonogramWrapper.classList.remove('hidden');
+    gameButtons.classList.add('hidden');
+  });
+}
+
+startGame();
 
 // ОТРИСОВКА НОНОГРАММЫ
-
 const table = document.createElement('table');
 
 for (let i = 0; i < 5; i += 1) {
@@ -33,7 +52,7 @@ for (let i = 0; i < 5; i += 1) {
   table.appendChild(row);
 }
 
-nonogramWrapper.appendChild(table);
+nonogram.appendChild(table);
 
 // НАЧАЛЬНОЕ СОСТОЯНИЕ НОНОГРАММЫ 5x5
 
@@ -77,44 +96,21 @@ function renderNonogram() {
 }
 renderNonogram();
 
-// ОБРАБОТЧИК СОБЫТИЙ
-
-function clickNonogram(event) {
-  const cell = event.target;
-  const rowIndex = cell.parentElement.rowIndex;
-  const cellIndex = cell.cellIndex;
-
-  const currentValue = initialNonogramState.get(rowIndex, cellIndex);
-  const newValue = currentValue === 1 ? 0 : 1;
-  initialNonogramState.set(rowIndex, cellIndex, newValue);
-
-  renderNonogram();
-
-  if (checkSolution()) {
-    modalResolve();
-  }
-}
-
-const cells = document.querySelectorAll('.nonogram-cell');
-cells.forEach((cell) => {
-  cell.addEventListener('click', clickNonogram);
-});
-
 // ДОБАВЛЯЕТ ПОДСКАЗКИ
 
 function generateHints(pattern) {
-  const numRows = pattern.length;
-  const numCols = pattern[0].length;
+  const generateNumRows = pattern.length;
+  const generateNumCols = pattern[0].length;
 
   const rowHints = [];
   const colHints = [];
 
   // Генерация подсказок для строк
-  for (let i = 0; i < numRows; i += 1) {
+  for (let i = 0; i < generateNumRows; i += 1) {
     const row = pattern[i];
     const rowHint = [];
     let count = 0;
-    for (let j = 0; j < numCols; j += 1) {
+    for (let j = 0; j < generateNumCols; j += 1) {
       if (row[j] === 1) {
         count += 1;
       } else if (count > 0) {
@@ -129,11 +125,11 @@ function generateHints(pattern) {
   }
 
   // Генерация подсказок для столбцов
-  for (let j = 0; j < numCols; j += 1) {
+  for (let j = 0; j < generateNumCols; j += 1) {
     const colHint = [];
     let count = 0;
     let hasFilledCell = false;
-    for (let i = 0; i < numRows; i += 1) {
+    for (let i = 0; i < generateNumRows; i += 1) {
       if (pattern[i][j] === 1) {
         count += 1;
         hasFilledCell = true;
@@ -173,14 +169,15 @@ const pattern = [
 
 const hints = generateHints(pattern);
 
-// Отображение подсказок
+// Отображение шифра нонограммы
+
 function renderHints() {
   const { row: rowHints, col: colHints } = hints;
 
-  // Отображение подсказок для строк
+  // для строк
   const rowHintsContainer = document.createElement('div');
   rowHintsContainer.classList.add('hints', 'row-hints');
-  nonogramWrapper.appendChild(rowHintsContainer);
+  nonogram.appendChild(rowHintsContainer);
 
   for (let i = 0; i < rowHints.length; i += 1) {
     const rowHint = rowHints[i];
@@ -190,10 +187,10 @@ function renderHints() {
     rowHintsContainer.appendChild(rowHintElement);
   }
 
-  // Отображение подсказок для столбцов
+  // для столбцов
   const colHintsContainer = document.createElement('div');
   colHintsContainer.classList.add('hints', 'col-hints');
-  nonogramWrapper.appendChild(colHintsContainer);
+  nonogram.appendChild(colHintsContainer);
 
   for (let j = 0; j < colHints.length; j += 1) {
     const colHint = colHints[j];
@@ -203,13 +200,13 @@ function renderHints() {
     colHintsContainer.appendChild(colHintElement);
   }
 }
-// Отображение сгенерированных подсказок
+
 renderHints();
 
 function checkSolution() {
-  const tableRows = table.getElementsByTagName('tr');
+  // const tableRows = table.getElementsByTagName('tr');
   for (let i = 0; i < numRows; i += 1) {
-    const cells = tableRows[i].getElementsByTagName('td');
+    // const cells = tableRows[i].getElementsByTagName('td');
     for (let j = 0; j < numCols; j += 1) {
       const cellValue = initialNonogramState.get(i, j);
       if (cellValue !== pattern[i][j]) {
@@ -222,28 +219,25 @@ function checkSolution() {
 
 checkSolution();
 
-// Модалка результата
+// ОБРАБАТЫВАЕТ НАЖАТИЯ ПО НОНОГРАММЕ
 
-function modalResolve() {
-  const modalResolveWrapper = document.createElement('div');
-  modalResolveWrapper.classList.add('modal__wrapper');
-  document.body.appendChild(modalResolveWrapper);
+function clickNonogram(event) {
+  const cell = event.target;
+  const { rowIndex } = cell.parentElement;
+  const { cellIndex } = cell;
 
-  const modalResolveInner = document.createElement('div');
-  modalResolveInner.classList.add('modal__resolve');
-  modalResolveWrapper.appendChild(modalResolveInner);
+  const currentValue = initialNonogramState.get(rowIndex, cellIndex);
+  const newValue = currentValue === 1 ? 0 : 1;
+  initialNonogramState.set(rowIndex, cellIndex, newValue);
 
-  const paragraph = document.createElement('p');
-  paragraph.classList.add('modal__title');
-  paragraph.textContent = 'CONGRATULATIONS!';
-  modalResolveInner.appendChild(paragraph);
+  renderNonogram();
 
-  const modalClose = document.createElement('div');
-  modalClose.classList.add('modal__close');
-  modalResolveInner.appendChild(modalClose);
-  modalClose.innerHTML = '<p>X</p >';
-
-  modalClose.addEventListener('click', () => {
-    modalResolveWrapper.remove();
-  });
+  if (checkSolution()) {
+    modalResolve();
+  }
 }
+
+const nonogramCells = document.querySelectorAll('.nonogram-cell');
+nonogramCells.forEach((cell) => {
+  cell.addEventListener('click', clickNonogram);
+});
