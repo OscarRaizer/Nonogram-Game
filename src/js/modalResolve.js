@@ -1,6 +1,3 @@
-import { gameButtons } from './buttons';
-import { nonogramWrapper } from './const';
-
 // Results modal
 export default function modalResolve() {
   const modalResolveWrapper = document.createElement('div');
@@ -21,9 +18,7 @@ export default function modalResolve() {
   modalResolveInner.appendChild(modalClose);
   modalClose.innerHTML = '<p>X</p >';
 
-  modalClose.addEventListener('click', () => {
-    modalResolveWrapper.remove();
-    nonogramWrapper.classList.add('hidden');
-    gameButtons.classList.remove('hidden');
-  });
+  return {
+    modalResolveWrapper, modalResolveInner, paragraph, modalClose,
+  };
 }

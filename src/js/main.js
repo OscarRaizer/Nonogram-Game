@@ -1,12 +1,13 @@
 import '../sass/style.scss';
-import modalResolve from './modalResolve';
 import {
-  gameWrapper, gameTitle, nonogram, nonogramWrapper, nonogramButtons,
+  gameWrapper, gameTitle, nonogram, nonogramClose, nonogramWrapper, nonogramButtons,
 } from './const';
 import {
   gameButtons, buttonReload, buttonSettings, buttonNew, buttonContinue, buttonLeaderBoard,
   buttonSave, buttonSolution,
 } from './buttons';
+
+import modalResolve from './modalResolve';
 
 // HTML rendering
 document.body.appendChild(gameWrapper);
@@ -21,21 +22,11 @@ gameButtons.appendChild(buttonLeaderBoard);
 
 gameWrapper.appendChild(nonogramWrapper);
 nonogramWrapper.appendChild(nonogram);
+nonogram.appendChild(nonogramClose);
 nonogramWrapper.appendChild(nonogramButtons);
 nonogramButtons.appendChild(buttonReload);
 nonogramButtons.appendChild(buttonSave);
 nonogramButtons.appendChild(buttonSolution);
-
-// Menu
-
-function startGame() {
-  buttonNew.addEventListener('click', () => {
-    nonogramWrapper.classList.remove('hidden');
-    gameButtons.classList.add('hidden');
-  });
-}
-
-startGame();
 
 // ОТРИСОВКА НОНОГРАММЫ
 const table = document.createElement('table');
@@ -59,7 +50,7 @@ nonogram.appendChild(table);
 const numRows = 5;
 const numCols = 5;
 
-function createState() {
+export default function createState() {
   const State = new Map();
   return {
     get(row, col) {
@@ -219,6 +210,48 @@ function checkSolution() {
 
 checkSolution();
 
+// CLEAR NONOGRAM
+function resetGame() {
+  for (let i = 0; i < numRows; i += 1) {
+    for (let j = 0; j < numCols; j += 1) {
+      initialNonogramState.set(i, j, 0); // Устанавливаем значение ячейки в 0
+    }
+  }
+  renderNonogram(); // Перерисовываем нонограмму
+}
+
+// BUTTONS
+
+// START NEW BUTTON
+function startGame() {
+  buttonNew.addEventListener('click', () => {
+    nonogramWrapper.classList.remove('hidden');
+    gameButtons.classList.add('hidden');
+    resetGame();
+  });
+}
+startGame();
+
+// CONTINUE BUTTON
+function continueGame() {
+  buttonContinue.addEventListener('click', () => {
+    nonogramWrapper.classList.remove('hidden');
+    gameButtons.classList.add('hidden');
+  });
+}
+continueGame();
+
+// RELOAD BUTTON
+buttonReload.addEventListener('click', () => {
+  resetGame();
+});
+
+// CLOSE NONOGRAM
+nonogramClose.addEventListener('click', () => {
+  nonogramWrapper.classList.add('hidden');
+  gameButtons.classList.remove('hidden');
+});
+
 // ОБРАБАТЫВАЕТ НАЖАТИЯ ПО НОНОГРАММЕ
 
 function clickNonogram(event) {
@@ -233,7 +266,13 @@ function clickNonogram(event) {
   renderNonogram();
 
   if (checkSolution()) {
-    modalResolve();
+    const
+      { modalResolveWrapper, modalClose } = modalResolve();
+    modalClose.addEventListener('click', () => {
+      modalResolveWrapper.classList.add('hidden');
+      nonogramWrapper.classList.add('hidden');
+      gameButtons.classList.remove('hidden');
+    });
   }
 }
 

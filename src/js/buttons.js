@@ -21,11 +21,6 @@ buttonReload.classList.add('buttons__reload');
 buttonReload.classList.add('button');
 buttonReload.innerHTML = '<span>Reload</span>';
 
-buttonReload.addEventListener('click', () => {
-  // eslint-disable-next-line no-console
-  console.log('hi');
-});
-
 // Save game button
 const buttonSave = document.createElement('div');
 buttonSave.classList.add('buttons__save');
