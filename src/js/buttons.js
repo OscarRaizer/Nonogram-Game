@@ -33,11 +33,28 @@ buttonSolution.classList.add('buttons__solution');
 buttonSolution.classList.add('button');
 buttonSolution.innerHTML = '<span>Solution</span>';
 
+// Settings buttons wrapper
+const settingsButtons = document.createElement('div');
+settingsButtons.classList.add('settings__buttons');
+settingsButtons.classList.add('buttons');
+
 // Settings button
 const buttonSettings = document.createElement('div');
 buttonSettings.classList.add('buttons__setting');
 buttonSettings.classList.add('button');
 buttonSettings.innerHTML = '<span>Settings</span>';
+
+// Sound button
+
+const soundSettings = document.createElement('div');
+soundSettings.classList.add('sound__setting');
+soundSettings.classList.add('button');
+soundSettings.innerHTML = '<span>Sound: on/off</span>';
+
+const backButton = document.createElement('div');
+backButton.classList.add('buttons__back');
+backButton.classList.add('button');
+backButton.innerHTML = '<span>back</span>';
 
 // Leaderboard button
 const buttonLeaderBoard = document.createElement('div');
@@ -47,5 +64,5 @@ buttonLeaderBoard.innerHTML = '<span>Leaderboard</span>';
 
 export {
   gameButtons, buttonReload, buttonSettings, buttonNew, buttonContinue, buttonLeaderBoard,
-  buttonSave, buttonSolution,
+  buttonSave, buttonSolution, soundSettings, settingsButtons, backButton,
 };
