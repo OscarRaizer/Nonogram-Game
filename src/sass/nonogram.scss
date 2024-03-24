@@ -9,8 +9,8 @@
 
 .nonogram {
     display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-template-rows: repeat(2, auto);
+    grid-template-columns: 75px 1fr 75px;
+    grid-template-rows: 75px 1fr;
     margin-bottom: 50px;
     width: fit-content;
     margin-left: auto;
@@ -50,6 +50,7 @@
     grid-row: 1 / 2;
     line-height: 60px;
     margin-bottom: 30px;
+    padding-left: 20px;
 
     .hint {
         transform: rotate(-90deg);
@@ -79,4 +80,27 @@ td {
     &:hover {
         background-color: gray;
     }
+}
+
+.nonogram__close{
+    grid-column: 3 / 3;
+    cursor: pointer;
+
+        p { 
+            display: block;
+            font-size: 50px;
+            margin: 0;
+            display: block;
+            font-family: "Playpen Sans";
+            line-height: 1;
+            margin-left: 10px;
+            color: white;
+
+            &:hover {
+                color: transparent;    
+                -webkit-background-clip: text;
+                background-clip: text;
+                background-image: linear-gradient(to bottom, #ff627a, #ff8b6d, #ffb36d, #ffda7f, #ffffa2);
+            } 
+        }
 }
