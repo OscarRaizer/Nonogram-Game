@@ -1,4 +1,4 @@
-.page__wrapper {
+.game__wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,14 +7,17 @@
     z-index: 1;
 }
 
-.page__title p {
-    font-family: 'Honk';
-    line-height: 80px;
-    text-align: center;
-    letter-spacing: 3px;
-    color: aliceblue;
-    margin: 0;
-    font-size: 85px;
-    font-weight: 700;
-    margin-bottom: 100px;
+.game__title {
+    margin-bottom: 70px;
+    
+        p {
+        font-family: 'Honk';
+        line-height: 80px;
+        text-align: center;
+        letter-spacing: 3px;
+        color: aliceblue;
+        margin: 0;
+        font-size: 85px;
+        font-weight: 700;
+    }
 }
