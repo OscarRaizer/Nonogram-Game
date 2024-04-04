@@ -7,7 +7,7 @@ gameButtons.classList.add('buttons');
 const buttonNew = document.createElement('div');
 buttonNew.classList.add('buttons__new');
 buttonNew.classList.add('button');
-buttonNew.innerHTML = '<span>Start New</span>';
+buttonNew.innerHTML = '<span>Start Random</span>';
 
 // Continue button
 const buttonContinue = document.createElement('div');
