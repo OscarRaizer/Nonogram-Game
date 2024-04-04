@@ -215,6 +215,7 @@ function getRandomPattern(data) {
   return data.nonograms[index].pattern;
 }
 
+// parse
 function initGame() {
   fetch('nonograms.json')
     .then((response) => response.json())
@@ -286,6 +287,17 @@ buttonReload.addEventListener('click', () => {
   resetGame();
 });
 
+// Button Solution
+buttonSolution.addEventListener('click', () => {
+  for (let i = 0; i < numRows; i += 1) {
+    for (let j = 0; j < numCols; j += 1) {
+      const cellValue = pattern[i][j];
+      initialNonogramState.set(i, j, cellValue);
+    }
+  }
+  renderNonogram();
+});
+
 // CLOSE NONOGRAM
 nonogramClose.addEventListener('click', () => {
   nonogramWrapper.classList.add('hidden');
@@ -306,8 +318,7 @@ function clickNonogram(event) {
   renderNonogram();
 
   if (checkSolution(pattern)) {
-    const
-      { modalResolveWrapper, modalClose } = modalResolve();
+    const { modalResolveWrapper, modalClose } = modalResolve();
     modalClose.addEventListener('click', () => {
       modalResolveWrapper.classList.add('hidden');
       nonogramWrapper.classList.add('hidden');
