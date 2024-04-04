@@ -1,4 +1,3 @@
-import '../sass/style.scss';
 import {
   gameWrapper, gameTitle, nonogram, nonogramClose, nonogramWrapper, nonogramButtons,
 } from './const';

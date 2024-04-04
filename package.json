@@ -2,14 +2,15 @@
   "name": "nonograms",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://github.com/OscarRaizer/Nonogram-Game/",
   "type": "module",
   "scripts": {
     "lint": "eslint --fix --ext .js,.jsx .",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && npx gh-pages -d dist -e nonograms",
-    "predeploy": "rm -rf dist"
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d dist"
   },
   "devDependencies": {
     "eslint": "^8.57.0",

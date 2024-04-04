@@ -2,7 +2,7 @@ export default {
   build: {
     sourcemap: true,
     outDir: 'dist',
-    base: '/oscarraizer-JSFE2023Q4/',
+    base: '/Nonogram-Game/',
     assetsDir: 'assets', // Создайте отдельную директорию для хранения аудиофайлов
   },
   assets: {
