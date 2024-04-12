@@ -1,0 +1,63 @@
+.modal__wrapper {
+    top: 0;
+    position: fixed;
+    z-index: 2;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: rgb(0, 0, 0, 0.2);
+
+    &.hidden {
+        display: none;
+    }
+}
+
+.modal__resolve {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-height: 60%;
+    min-width: 60%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 0, 0.6);
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    border: 1px solid white;
+}
+
+.modal__title {
+    font-family: "Josefin Slab";
+    font-size: 50px;
+    margin: 0;
+    color: transparent;    
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(to bottom, #ff627a, #ff8b6d, #ffb36d, #ffda7f, #ffffa2);
+}
+
+
+.modal__close {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+
+    p { 
+        display: block;
+        font-size: 40px;
+        margin: 0;
+        display: block;
+        padding: 5px;
+        font-family: "Playpen Sans";
+
+        &:hover {
+            color: rgb(130, 130, 130);
+        } 
+    }
+}
