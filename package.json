@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --fix --ext .js,.jsx .",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=./",
     "preview": "vite preview",
     "predeploy" : "npm run build",
     "deploy" : "gh-pages -d dist"
