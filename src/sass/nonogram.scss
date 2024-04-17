@@ -31,6 +31,10 @@
   &.hidden {
     display: none;
   }
+
+  @media (max-width: 767px) {
+    gap: 5px;
+  }
 }
 
 .hints {
@@ -49,6 +53,7 @@
 
   @media (max-width: 767px) {
     line-height: 45px;
+    margin-right: 0px;
   }
 }
 

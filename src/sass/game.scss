@@ -1,0 +1,51 @@
+.game__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 45px 30px;
+  z-index: 1;
+
+  @media (max-width: 767px) {
+    padding: 20px 10px;
+  }
+}
+
+.game__title {
+  margin-bottom: 90px;
+
+  @media (max-width: 767px) {
+    margin-bottom: 30px;
+  }
+
+  p {
+    font-family: "Honk";
+    line-height: 80px;
+    text-align: center;
+    letter-spacing: 3px;
+    margin: 0;
+    font-size: calc(4vw + 4vh + 2vmin);
+    font-weight: 700;
+
+    @media (max-width: 767px) {
+      line-height: 50px;
+    }
+  }
+}
+
+.game__buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+
+  &.hidden {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    gap: 20px;
+  }
+}
